@@ -35,3 +35,9 @@ if __name__ == '__main__':
     y = dataset.iloc[:, 8]
     x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, test_size=0.2)
 
+    # scales data so that values are between -1 and 1 which makes it easier to work with
+
+    sc_X = StandardScaler()
+    x_train = sc_X.fit_transform(x_train)
+    x_test = sc_X.fit_transform(x_test)
+
