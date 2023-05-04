@@ -18,6 +18,7 @@ if __name__ == '__main__':
     print(dataset.head())
     print(len(dataset))
     print(dataset.columns.tolist())  # displays all columns
+    print(dataset['Glucose'])
 
     no_zeros = ['Glucose', 'Insulin', 'BloodPressure', 'SkinThickness', 'BMI', 'Age']  # created a list of column headings where zero cannot be accepted
 
@@ -27,4 +28,10 @@ if __name__ == '__main__':
         dataset[column] = dataset[column].replace(0, np.NaN)
         mean = int(dataset[column].mean(skipna=True))
         dataset[column] = dataset[column].replace(np.NaN, mean)
+
+    # Splitting the data into testing and results
+
+    x = dataset.iloc[:, 0:8]
+    y = dataset.iloc[:, 8]
+    x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, test_size=0.2)
 
